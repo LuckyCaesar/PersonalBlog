@@ -1,4 +1,4 @@
-# Origin projetc for luckycaesar.github.io
+# Origin project for luckycaesar.github.io
 
 ### Some hexo commands:
 ```
