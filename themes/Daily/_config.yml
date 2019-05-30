@@ -35,7 +35,7 @@ node_sass:
   sourceComments: false
 
 # Default post title
-default_post_title: Untitled
+default_post_title: Default title
 
 # social
 social:

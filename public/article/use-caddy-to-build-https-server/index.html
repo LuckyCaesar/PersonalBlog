@@ -152,29 +152,36 @@
 <p>官网：<a href="https://caddyserver.com/" target="_blank" rel="noopener">https://caddyserver.com/</a></p>
 <p>官方文档：<a href="https://caddyserver.com/docs/getting-started" target="_blank" rel="noopener">https://caddyserver.com/docs/getting-started</a></p>
 <p>这里介绍本站的 Caddy 服务器配置过程。从 Nginx 换到 Caddy 整个过程不到10分钟，官方甚至有一个28秒的<a href="https://www.youtube.com/watch?time_continue=28&amp;v=nk4EWHvvZtI" target="_blank" rel="noopener">配置视频</a>。</p>
-<h2 id="1-快速上手"><a href="#1-快速上手" class="headerlink" title="1. 快速上手"></a>1. 快速上手</h2><h3 id="1-1-下载安装"><a href="#1-1-下载安装" class="headerlink" title="1.1 下载安装"></a>1.1 下载安装</h3><p>进入 <a href="https://caddyserver.com/download" target="_blank" rel="noopener">下载页面</a> 勾选需要的模块，选择平台进行下载 。（我的是 Ubuntu x64，因此选择了Linux 64-bit，下载后再上传到 VPS，因为链接是生成的，没有固定链接，囧）</p>
+<h2>1. 快速上手</h2>
+<h3>1.1 下载安装</h3>
+<p>进入 <a href="https://caddyserver.com/download" target="_blank" rel="noopener">下载页面</a> 勾选需要的模块，选择平台进行下载 。（我的是 Ubuntu x64，因此选择了Linux 64-bit，下载后再上传到 VPS，因为链接是生成的，没有固定链接，囧）</p>
 <p>下载后的压缩文件 <code>caddy_linux_amd64_custom.tar.gz</code> 放到网站根目录（跟 index.html 同级），进行解压：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxvf caddy_linux_amd64_custom.tar.gz</span><br></pre></td></tr></table></figure>
 <p>会得到 caddy 文件以及 init 文件夹和其他杂项文件。</p>
-<h3 id="1-2-运行"><a href="#1-2-运行" class="headerlink" title="1.2 运行"></a>1.2 运行</h3><p>在 caddy 解压出来的目录（网站根目录）执行 <code>./caddy</code> ，这时访问 <code>localhost:2015</code> 你的网站应该已经愉快地跑起来了。如果你在 vps 上进行的此操作，远程访问 http://你的ip:2015 应该也能看到你的站点了。</p>
-<h2 id="2-配置-Caddy"><a href="#2-配置-Caddy" class="headerlink" title="2. 配置 Caddy"></a>2. 配置 Caddy</h2><p>如何自定义 Caddy 服务呢？在你的站点目录里创建一个名为 <code>Caddyfile</code> 的文件，文件的第一行写上监听地址，如：</p>
+<h3>1.2 运行</h3>
+<p>在 caddy 解压出来的目录（网站根目录）执行 <code>./caddy</code> ，这时访问 <code>localhost:2015</code> 你的网站应该已经愉快地跑起来了。如果你在 vps 上进行的此操作，远程访问 <a href="http://xn--ip-0p3cm89l:2015" target="_blank" rel="noopener">http://你的ip:2015</a> 应该也能看到你的站点了。</p>
+<h2>2. 配置 Caddy</h2>
+<p>如何自定义 Caddy 服务呢？在你的站点目录里创建一个名为 <code>Caddyfile</code> 的文件，文件的第一行写上监听地址，如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:8080</span><br></pre></td></tr></table></figure>
 <p>重新启动 Caddy：执行  <code>./caddy</code> ，你会发现站点已经运行在8080端口了。</p>
 <p>Caddyfile 可以在其他目录，也可以命名为其他你喜欢的名字。只需要在启动 Caddy 时告诉它配置文件在哪：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> caddy -conf=<span class="string">"../path/to/Caddyfile"</span></span></span><br></pre></td></tr></table></figure>
 <p>Caddyfile 语法：<a href="https://caddyserver.com/docs/caddyfile" target="_blank" rel="noopener">查看</a></p>
-<h2 id="3-实现自动化-HTTPS"><a href="#3-实现自动化-HTTPS" class="headerlink" title="3. 实现自动化 HTTPS"></a>3. 实现自动化 HTTPS</h2><p>Caddy 自动地为你的站点启用 HTTPS。注意：需要配置 host 不能为空，也不能是 localhost 或 ip 地址。</p>
+<h2>3. 实现自动化 HTTPS</h2>
+<p>Caddy 自动地为你的站点启用 HTTPS。注意：需要配置 host 不能为空，也不能是 localhost 或 ip 地址。</p>
 <p>我的静态博客的配置是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blog.hinpc.com &#123;</span><br><span class="line">    root /home/blog.hinpc.com/www #换成你的网站路径</span><br><span class="line">    gzip</span><br><span class="line">    log ../access.log</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行  <code>./caddy</code> ，网站已启动，并且支持 HTTPS 了。它的证书是由 <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 实现的，并且自动为你的网站申请和续期。</p>
-<h2 id="4-使用-supservisor-来运行-Caddy"><a href="#4-使用-supservisor-来运行-Caddy" class="headerlink" title="4. 使用 supservisor 来运行 Caddy"></a>4. 使用 supservisor 来运行 Caddy</h2><p>在你的 <code>supervisord.conf</code> 文件中，<code>[supervisord]</code> 区域下配置：</p>
+<h2>4. 使用 supservisor 来运行 Caddy</h2>
+<p>在你的 <code>supervisord.conf</code> 文件中，<code>[supervisord]</code> 区域下配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minfds=4096</span><br></pre></td></tr></table></figure>
-<p> <code>supervisord.conf</code> 中添加：</p>
+<p><code>supervisord.conf</code> 中添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[program:caddy]</span><br><span class="line">directory=/etc/caddy/ ## 换成你的目录</span><br><span class="line">command=/etc/caddy/caddy -conf=&quot;/etc/caddy/Caddyfile&quot; ## 换成你的配置文件</span><br><span class="line">user=www-data</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=true</span><br><span class="line">stdout_logfile=/var/log/supervisor/caddy_stdout.log</span><br><span class="line">stderr_logfile=/var/log/supervisor/caddy_stderr.log</span><br></pre></td></tr></table></figure>
 <p>启用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> supervisorctl reread</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> supervisorctl add caddy</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> supervisorctl start caddy</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://caddyserver.com/docs/getting-started" target="_blank" rel="noopener">https://caddyserver.com/docs/getting-started</a></p>
+<h3>参考</h3>
+<p><a href="https://caddyserver.com/docs/getting-started" target="_blank" rel="noopener">https://caddyserver.com/docs/getting-started</a></p>
 <p><a href="http://depado.markdownblog.com/2015-12-07-setting-up-caddy-server-on-debian" target="_blank" rel="noopener">http://depado.markdownblog.com/2015-12-07-setting-up-caddy-server-on-debian</a></p>
 
         </div>
