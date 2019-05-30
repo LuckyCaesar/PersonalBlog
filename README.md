@@ -1,6 +1,6 @@
 # Origin projetc for luckycaesar.github.io
 
-### Use these hexo command to update and deploy blog.
+### Some hexo commands:
 ```
 hexo new post "<post name>" # you can change post to another layout if you want
 hexo clean && hexo generate # generate the static file
