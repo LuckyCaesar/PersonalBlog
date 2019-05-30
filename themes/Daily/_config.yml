@@ -1,0 +1,54 @@
+# basic
+title: Daily
+subtitle: Minimalism, simplicity and refined details
+# favicon: https://hexo.io/icon/favicon-96x96.png
+favicon: /img/rose.png
+
+# avatar: images/avatar.png
+# banner_small: images/banner-small.png
+# banner_large: images/banner-large.png
+# logo: https://hexo.io/logo.svg
+logo: /img/kobe.jpg
+
+# disqus
+#disqus_shortname: drakeleung
+
+highlight:
+  enable: true
+  line_number: false
+  auto_detect: false
+  tab_replace:
+
+highlight_theme: night eighties
+
+# nav #
+nav:
+  首页: .
+  归档: archives
+  关于: about
+  # rss: atom.xml
+
+# hexo-renderer-sass
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
+# Default post title
+default_post_title: Untitled
+
+# social
+social:
+  github: https://github.com/LuckyCaesar
+  twitter: https://twitter.com/XiongCaesar
+  # weibo: http://weibo.com/10010800
+  # mail: mailto:xxx@foxmail.com
+
+# widget
+#   title: 标题
+#   content: 内容
+widget:
+  title: 关于本站
+  content: 学而不思则罔，思而不学则殆。
+
+footer: Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a>
